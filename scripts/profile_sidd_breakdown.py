@@ -168,7 +168,7 @@ def main():
     if args.compile:
         if not hasattr(torch, "compile"):
             raise RuntimeError("torch.compile is not available in this PyTorch version")
-        model = torch.compile(model)
+        model = torch.compile(model, mode="max-autotune")
 
     x = torch.randn(args.batch, args.channels, args.height, args.width_px, device=device)
     if args.fp16 and device.type == "cuda":
